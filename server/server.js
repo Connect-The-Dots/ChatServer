@@ -36,7 +36,7 @@ db.once('open', function() {
     // PORT binding
     const PORT = process.env.PORT;
 
-    const server = app.listen(PORT, () => {
+    const server = app.listen(PORT || 3001, () => {
       console.log(`ConnectTheDots server is listening at http://localhost:${PORT || 3001}`)
     })
 
