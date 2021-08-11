@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const https = require('https');
+const http = require('http');
 const socket = require('socket.io');
 const cors = require('cors');
 // const messageRoutes = require("../server/messageRoutes");
@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, './chatModels')));
 // app.use("/diaryApi", diaryRoutes);
 
 
-const server = https.createServer(app);
+const server = http.createServer(app);
 const io = socket(server);
 
 
