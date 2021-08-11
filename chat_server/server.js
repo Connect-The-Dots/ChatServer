@@ -2,7 +2,6 @@ const path = require('path');
 const express = require('express');
 const http = require('http');
 const socket = require('socket.io');
-const express = require('express');
 const cors = require('cors');
 // const messageRoutes = require("../server/messageRoutes");
 // const userRoutes = require("../server/userRoutes");
