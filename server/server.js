@@ -1,10 +1,10 @@
 // Initializations
 const express = require('express');
 const cors = require('cors');
-const messageRoutes = require("./messageRoutes")
-const userRoutes = require("./userRoutes")
-const dataRoutes = require("./dataRoutes")
-const diaryRoutes = require("./diaryRoutes")
+const messageRoutes = require("./messageRoutes");
+const userRoutes = require("./userRoutes");
+const dataRoutes = require("./dataRoutes");
+const diaryRoutes = require("./diaryRoutes");
 const socket = require('socket.io');
 
 // Mongoose initializations

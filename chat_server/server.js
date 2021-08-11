@@ -2,23 +2,47 @@ const path = require('path');
 const express = require('express');
 const http = require('http');
 const socket = require('socket.io');
-
-
+const express = require('express');
+const cors = require('cors');
+// const messageRoutes = require("../server/messageRoutes");
+// const userRoutes = require("../server/userRoutes");
+// const dataRoutes = require("../server/dataRoutes");
+// const diaryRoutes = require("../server/diaryRoutes");
 // let clients = [];
 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://ConnectTheDotsDbAdmin:readandwrite@connectthedotscluster.ottrl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&ssl=true', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false});
+
+// Connect to MongoDb
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+    
+console.log("Connected to ConnectTheDots MongoDb successfully!");
+    
+    // Initialize Express server
 const app = express();
+app.enable('trust proxy');
+
+    // Middleware
+app.use(express.json());
+app.use(cors());  
+app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, './chatModels')));
+   
+    // IMPORTANT: End Points
+// app.use("/messageApi", messageRoutes);
+// app.use("/userApi", userRoutes);
+// app.use("/dataApi", dataRoutes);
+// app.use("/diaryApi", diaryRoutes);
+
+
 const server = http.createServer(app);
 const io = socket(server);
 
-const user = "Harry";
 
-// var x = path.join('back-end', 'chat_server', 'chatModels');
+const PORT = 10000 || process.env.PORT;
 
-// console.log('path is now ', x);
-
-// change the default path !!!!!
-// app.use(express.static('../../front-end/src/components/Message/Chat/index.html'));
-app.use(express.static(path.join(__dirname, '../../front-end/src/components/Message/Chat/chatModels')));
+server.listen(PORT, () => console.log(`>> server is listening to port: ${PORT}`));
 
 io.on('connection', (socket) => {
     console.log('>> new client connection ', socket.id)
@@ -78,7 +102,3 @@ io.on('connection', (socket) => {
         socket.to(message.receiver).emit('leave', message)
     })
 })
-
-const PORT = 10000 || process.env.PORT;
-
-server.listen(PORT, () => console.log(`>> server is listening to port: ${PORT}`));
