@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const http = require('http');
+const https = require('https');
 const socket = require('socket.io');
 const cors = require('cors');
 // const messageRoutes = require("../server/messageRoutes");
@@ -25,7 +25,7 @@ app.enable('trust proxy');
     // Middleware
 app.use(express.json());
 app.use(cors());  
-// app.use(express.static('../server/public'));
+app.use(express.static('../server/public'));
 app.use(express.static(path.join(__dirname, './chatModels')));
    
     // IMPORTANT: End Points
@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, './chatModels')));
 // app.use("/diaryApi", diaryRoutes);
 
 
-const server = http.createServer(app);
+const server = https.createServer(app);
 const io = socket(server);
 
 
