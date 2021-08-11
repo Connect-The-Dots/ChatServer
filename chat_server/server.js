@@ -39,7 +39,7 @@ const server = https.createServer(app);
 const io = socket(server);
 
 
-const PORT = 10000 || process.env.PORT;
+const PORT = process.env.PORT;
 
 server.listen(PORT, () => console.log(`>> server is listening to port: ${PORT}`));
 
